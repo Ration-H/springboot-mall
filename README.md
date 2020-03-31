@@ -3,10 +3,10 @@
 
 
 ----------
-- **parent：管理所有依赖的版本**
-- **common-utils：通用jar**
-- **web-util：Web、Controller层通用jar**
-- **service-util：Service层通用jar**
+- **mall-parent：管理所有依赖的版本**
+- **mall-common-utils：通用jar**
+- **mall-web-util：Web、Controller层通用jar**
+- **mall-service-util：Service层通用jar**
 
 ----------
 遇到的问题及注意事项：            
@@ -15,3 +15,4 @@
    在核心配置文件`spring.datasource.url`属性添加`?serverTimezone=GMT`解决    <br/> 
 2. 因为使用了tk.mybatis的通用Mapper，MBG理论上不用生成Mapper接口和xml文件 <br/> 
    启动类的`@MapperScan`要使用tk.mybatis的，我们的Mapper接口要继承tk的Mapper<Class>类 <br/>       
+3. 使用idea+mvaen+java代码生成文件时，路径要使用`绝对路径`。原因未解决  
