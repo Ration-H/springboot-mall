@@ -1,6 +1,6 @@
-package com.gdou.mall.user.service;
+package com.gdou.mall.service;
 
-import com.gdou.mall.user.pojo.User;
+import com.gdou.mall.pojo.User;
 
 import java.util.List;
 
