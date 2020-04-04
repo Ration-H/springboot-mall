@@ -1,20 +1,24 @@
 # springboot-mall
 ##使用springboot实现网上商城
 
+
 开发环境
 
-|    依赖    |   版本   |
-|:----------:|  :----:  |
-|JDK |   8   |  
-|Tomcat |   8   |
-|Mysql |   5   |
-|IDEA |   2018   |
+|    依赖    |   版本   |  Window  |   Linux  |
+|:----------:|  :----:  |  :----:  |  :----:  |
+|JDK |   8   |  √| √  |
+|Tomcat |   8   |√| √  |
+|Mysql |   5   |√|   |
+|IDEA |   2018   |√|   |
+|Zookeeper |   2018   | |  √ |
+|FastDFS |   2018   | |  √ |
 
 各个模块端口
 
 |     模块   |   端口   |
 |:----------:|  :----:  |
 |user    |   8090   |  
+|mall-admin|   8888   |
 |manage-web    |   8080   |  
 |manage-service|   8070   |
 |user-web    |   8081   |  
@@ -22,6 +26,8 @@
 
 
 ----------
+
+各个子模块说明
 - **generator：逆向工程**
 - **mall-parent：管理所有依赖的版本**
 - **mall-api：存放pojo类和service接口**    
@@ -54,3 +60,21 @@ Tip 3:
 2. 由于`前后端分离`，后端Controller要加`@CrossOrigin`
 3. `增删改`都在一个ServiceImpl的`同一个方法`里处理，非常有意思
    方法位置`com.gdou.mall.manage.service.impl.AttrServiceImpl.saveAttrInfo`
+   
+---------
+Tip 4:
+1. 使用了@JSONField绑定不上数据；
+   原因：SpringBoot默认使用jackSon
+   [解决办法](https://blog.csdn.net/xuqingge/article/details/53561529) 
+2. Linux部署FastDFS时，没有storage服务
+   原因：`tracker_server=127.0.0.1:22122`，虽然tracker和storage都在同一台虚拟机上，但是`不能用127.0.0.1`  
+   解决：tracker_server=trackerIP:22122
+   
+--------
+Tip 5:
+1. Controller上传图片到FastDFS过程中`连不上Storage服务`
+   原因：Linux`没开放23000端口`
+   解决：iptables`开放23000端口`，ps：`Tracker Server端口`：`22122`
+2. 访问图片时不能显示图片，`<img src="192.168.141.128/group1/M00/00/00/wKiNgF6IhLOAG6y8AATrdYpbQmQ186.png">`
+   原因：src路径`没加http//:`，会被自动加上`http//:localhost:8080/项目名`
+   解决：存储Img src时`加上http//:`

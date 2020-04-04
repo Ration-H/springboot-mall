@@ -3,6 +3,7 @@ package com.gdou.mall.manager.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.gdou.mall.pojo.ProductBaseAttrInfo;
 import com.gdou.mall.pojo.ProductBaseAttrValue;
+import com.gdou.mall.pojo.ProductBaseSaleAttr;
 import com.gdou.mall.service.AttrService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,15 @@ public class AttrController {
     @Reference
     AttrService attrService;
 
-    //添加类目的属性信息
+    //查询所有销售属性
+    @RequestMapping("baseSaleAttrList")
+    @ResponseBody
+    public List<ProductBaseSaleAttr> baseSaleAttrList() {
+        List<ProductBaseSaleAttr> productBaseSaleAttrList = attrService.baseSaleAttrList();
+        return productBaseSaleAttrList;
+    }
+
+    //添加、更新类目的属性信息
     @RequestMapping("saveAttrInfo")
     @ResponseBody
     public String saveAttrInfo(@RequestBody ProductBaseAttrInfo productBaseAttrInfo) {

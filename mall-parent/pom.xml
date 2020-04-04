@@ -32,6 +32,7 @@
         <jest.version>5.3.3</jest.version>
         <jna.version>4.5.1</jna.version>
         <beanUtils.version>1.9.3</beanUtils.version>
+        <fastdfs-client-java-version>1.27</fastdfs-client-java-version>
     </properties>
 
     <groupId>com.gdou</groupId>
@@ -41,6 +42,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cn.bestwu</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
+                <version>${fastdfs-client-java-version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
