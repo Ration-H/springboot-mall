@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.WmsWareSkuMapper">
+  <resultMap id="BaseResultMap" type="pojo.WmsWareSku">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="warehouse_id" jdbcType="BIGINT" property="warehouseId" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="stock_locked" jdbcType="INTEGER" property="stockLocked" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wms_ware_sku
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.WmsWareSku">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wms_ware_sku (id, sku_id, warehouse_id, 
+      stock, stock_name, stock_locked
+      )
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{warehouseId,jdbcType=BIGINT}, 
+      #{stock,jdbcType=INTEGER}, #{stockName,jdbcType=VARCHAR}, #{stockLocked,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.WmsWareSku">
+    update wms_ware_sku
+    set sku_id = #{skuId,jdbcType=BIGINT},
+      warehouse_id = #{warehouseId,jdbcType=BIGINT},
+      stock = #{stock,jdbcType=INTEGER},
+      stock_name = #{stockName,jdbcType=VARCHAR},
+      stock_locked = #{stockLocked,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, sku_id, warehouse_id, stock, stock_name, stock_locked
+    from wms_ware_sku
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, sku_id, warehouse_id, stock, stock_name, stock_locked
+    from wms_ware_sku
+  </select>
+</mapper>

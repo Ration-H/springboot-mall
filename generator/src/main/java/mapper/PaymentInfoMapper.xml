@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PaymentInfoMapper">
+  <resultMap id="BaseResultMap" type="pojo.PaymentInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="alipay_trade_no" jdbcType="VARCHAR" property="alipayTradeNo" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="payment_status" jdbcType="VARCHAR" property="paymentStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="callback_content" jdbcType="VARCHAR" property="callbackContent" />
+    <result column="callback_time" jdbcType="TIMESTAMP" property="callbackTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.PaymentInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_info (id, order_sn, order_id, 
+      alipay_trade_no, total_amount, subject, 
+      payment_status, create_time, confirm_time, 
+      callback_content, callback_time)
+    values (#{id,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{alipayTradeNo,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, #{subject,jdbcType=VARCHAR}, 
+      #{paymentStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, 
+      #{callbackContent,jdbcType=VARCHAR}, #{callbackTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.PaymentInfo">
+    update payment_info
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      alipay_trade_no = #{alipayTradeNo,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      subject = #{subject,jdbcType=VARCHAR},
+      payment_status = #{paymentStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      callback_content = #{callbackContent,jdbcType=VARCHAR},
+      callback_time = #{callbackTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, order_sn, order_id, alipay_trade_no, total_amount, subject, payment_status, 
+    create_time, confirm_time, callback_content, callback_time
+    from payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_sn, order_id, alipay_trade_no, total_amount, subject, payment_status, 
+    create_time, confirm_time, callback_content, callback_time
+    from payment_info
+  </select>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserLevelMapper">
+  <resultMap id="BaseResultMap" type="pojo.UserLevel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="growth_point" jdbcType="INTEGER" property="growthPoint" />
+    <result column="default_status" jdbcType="INTEGER" property="defaultStatus" />
+    <result column="free_freight_point" jdbcType="DECIMAL" property="freeFreightPoint" />
+    <result column="comment_growth_point" jdbcType="INTEGER" property="commentGrowthPoint" />
+    <result column="priviledge_free_freight" jdbcType="INTEGER" property="priviledgeFreeFreight" />
+    <result column="priviledge_sign_in" jdbcType="INTEGER" property="priviledgeSignIn" />
+    <result column="priviledge_comment" jdbcType="INTEGER" property="priviledgeComment" />
+    <result column="priviledge_promotion" jdbcType="INTEGER" property="priviledgePromotion" />
+    <result column="priviledge_user_price" jdbcType="INTEGER" property="priviledgeUserPrice" />
+    <result column="priviledge_birthday" jdbcType="INTEGER" property="priviledgeBirthday" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.UserLevel">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_level (id, name, growth_point, 
+      default_status, free_freight_point, comment_growth_point, 
+      priviledge_free_freight, priviledge_sign_in, 
+      priviledge_comment, priviledge_promotion, 
+      priviledge_user_price, priviledge_birthday, 
+      note)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{growthPoint,jdbcType=INTEGER}, 
+      #{defaultStatus,jdbcType=INTEGER}, #{freeFreightPoint,jdbcType=DECIMAL}, #{commentGrowthPoint,jdbcType=INTEGER}, 
+      #{priviledgeFreeFreight,jdbcType=INTEGER}, #{priviledgeSignIn,jdbcType=INTEGER}, 
+      #{priviledgeComment,jdbcType=INTEGER}, #{priviledgePromotion,jdbcType=INTEGER}, 
+      #{priviledgeUserPrice,jdbcType=INTEGER}, #{priviledgeBirthday,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.UserLevel">
+    update user_level
+    set name = #{name,jdbcType=VARCHAR},
+      growth_point = #{growthPoint,jdbcType=INTEGER},
+      default_status = #{defaultStatus,jdbcType=INTEGER},
+      free_freight_point = #{freeFreightPoint,jdbcType=DECIMAL},
+      comment_growth_point = #{commentGrowthPoint,jdbcType=INTEGER},
+      priviledge_free_freight = #{priviledgeFreeFreight,jdbcType=INTEGER},
+      priviledge_sign_in = #{priviledgeSignIn,jdbcType=INTEGER},
+      priviledge_comment = #{priviledgeComment,jdbcType=INTEGER},
+      priviledge_promotion = #{priviledgePromotion,jdbcType=INTEGER},
+      priviledge_user_price = #{priviledgeUserPrice,jdbcType=INTEGER},
+      priviledge_birthday = #{priviledgeBirthday,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, growth_point, default_status, free_freight_point, comment_growth_point, 
+    priviledge_free_freight, priviledge_sign_in, priviledge_comment, priviledge_promotion, 
+    priviledge_user_price, priviledge_birthday, note
+    from user_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, growth_point, default_status, free_freight_point, comment_growth_point, 
+    priviledge_free_freight, priviledge_sign_in, priviledge_comment, priviledge_promotion, 
+    priviledge_user_price, priviledge_birthday, note
+    from user_level
+  </select>
+</mapper>

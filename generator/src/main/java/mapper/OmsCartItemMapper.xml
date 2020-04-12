@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.OmsCartItemMapper">
+  <resultMap id="BaseResultMap" type="pojo.OmsCartItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_sku_id" jdbcType="BIGINT" property="productSkuId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="sp1" jdbcType="VARCHAR" property="sp1" />
+    <result column="sp2" jdbcType="VARCHAR" property="sp2" />
+    <result column="sp3" jdbcType="VARCHAR" property="sp3" />
+    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_sub_title" jdbcType="VARCHAR" property="productSubTitle" />
+    <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
+    <result column="product_brand" jdbcType="VARCHAR" property="productBrand" />
+    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
+    <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from oms_cart_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.OmsCartItem">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_cart_item (id, product_id, product_sku_id, 
+      user_id, quantity, price, 
+      sp1, sp2, sp3, product_pic, 
+      product_name, product_sub_title, product_sku_code, 
+      user_nickname, create_date, modify_date, 
+      delete_status, product_category_id, product_brand, 
+      product_sn, product_attr)
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productSkuId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{sp1,jdbcType=VARCHAR}, #{sp2,jdbcType=VARCHAR}, #{sp3,jdbcType=VARCHAR}, #{productPic,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productSubTitle,jdbcType=VARCHAR}, #{productSkuCode,jdbcType=VARCHAR}, 
+      #{userNickname,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{deleteStatus,jdbcType=INTEGER}, #{productCategoryId,jdbcType=BIGINT}, #{productBrand,jdbcType=VARCHAR}, 
+      #{productSn,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.OmsCartItem">
+    update oms_cart_item
+    set product_id = #{productId,jdbcType=BIGINT},
+      product_sku_id = #{productSkuId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      quantity = #{quantity,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      sp1 = #{sp1,jdbcType=VARCHAR},
+      sp2 = #{sp2,jdbcType=VARCHAR},
+      sp3 = #{sp3,jdbcType=VARCHAR},
+      product_pic = #{productPic,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_sub_title = #{productSubTitle,jdbcType=VARCHAR},
+      product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      product_category_id = #{productCategoryId,jdbcType=BIGINT},
+      product_brand = #{productBrand,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      product_attr = #{productAttr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, product_id, product_sku_id, user_id, quantity, price, sp1, sp2, sp3, product_pic, 
+    product_name, product_sub_title, product_sku_code, user_nickname, create_date, modify_date, 
+    delete_status, product_category_id, product_brand, product_sn, product_attr
+    from oms_cart_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_id, product_sku_id, user_id, quantity, price, sp1, sp2, sp3, product_pic, 
+    product_name, product_sub_title, product_sku_code, user_nickname, create_date, modify_date, 
+    delete_status, product_category_id, product_brand, product_sn, product_attr
+    from oms_cart_item
+  </select>
+</mapper>

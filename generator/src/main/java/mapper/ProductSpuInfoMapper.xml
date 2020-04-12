@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductSpuInfoMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductSpuInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="catalog3_id" jdbcType="BIGINT" property="catalog3Id" />
+    <result column="tm_id" jdbcType="BIGINT" property="tmId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_spu_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductSpuInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_spu_info (id, product_name, description, 
+      catalog3_id, tm_id)
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{catalog3Id,jdbcType=BIGINT}, #{tmId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductSpuInfo">
+    update product_spu_info
+    set product_name = #{productName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      catalog3_id = #{catalog3Id,jdbcType=BIGINT},
+      tm_id = #{tmId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, product_name, description, catalog3_id, tm_id
+    from product_spu_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_name, description, catalog3_id, tm_id
+    from product_spu_info
+  </select>
+</mapper>

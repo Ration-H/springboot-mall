@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductSkuInfoMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductSkuInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_desc" jdbcType="VARCHAR" property="skuDesc" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="tm_id" jdbcType="BIGINT" property="tmId" />
+    <result column="catalog3_id" jdbcType="BIGINT" property="catalog3Id" />
+    <result column="sku_default_img" jdbcType="VARCHAR" property="skuDefaultImg" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_sku_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductSkuInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_sku_info (id, product_id, price, 
+      sku_name, sku_desc, weight, 
+      tm_id, catalog3_id, sku_default_img
+      )
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, 
+      #{skuName,jdbcType=VARCHAR}, #{skuDesc,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, 
+      #{tmId,jdbcType=BIGINT}, #{catalog3Id,jdbcType=BIGINT}, #{skuDefaultImg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductSkuInfo">
+    update product_sku_info
+    set product_id = #{productId,jdbcType=BIGINT},
+      price = #{price,jdbcType=DOUBLE},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_desc = #{skuDesc,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      tm_id = #{tmId,jdbcType=BIGINT},
+      catalog3_id = #{catalog3Id,jdbcType=BIGINT},
+      sku_default_img = #{skuDefaultImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, product_id, price, sku_name, sku_desc, weight, tm_id, catalog3_id, sku_default_img
+    from product_sku_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_id, price, sku_name, sku_desc, weight, tm_id, catalog3_id, sku_default_img
+    from product_sku_info
+  </select>
+</mapper>

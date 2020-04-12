@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductSpuVertifyRecordMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductSpuVertifyRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="vertify_man" jdbcType="VARCHAR" property="vertifyMan" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_spu_vertify_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductSpuVertifyRecord">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_spu_vertify_record (id, product_id, create_time, 
+      vertify_man, status, detail
+      )
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{vertifyMan,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductSpuVertifyRecord">
+    update product_spu_vertify_record
+    set product_id = #{productId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      vertify_man = #{vertifyMan,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      detail = #{detail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, product_id, create_time, vertify_man, status, detail
+    from product_spu_vertify_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_id, create_time, vertify_man, status, detail
+    from product_spu_vertify_record
+  </select>
+</mapper>

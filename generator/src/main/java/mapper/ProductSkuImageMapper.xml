@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductSkuImageMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductSkuImage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="img_name" jdbcType="VARCHAR" property="imgName" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="product_img_id" jdbcType="BIGINT" property="productImgId" />
+    <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_sku_image
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductSkuImage">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_sku_image (id, sku_id, img_name, 
+      img_url, product_img_id, is_default
+      )
+    values (#{id,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{imgName,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{productImgId,jdbcType=BIGINT}, #{isDefault,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductSkuImage">
+    update product_sku_image
+    set sku_id = #{skuId,jdbcType=BIGINT},
+      img_name = #{imgName,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      product_img_id = #{productImgId,jdbcType=BIGINT},
+      is_default = #{isDefault,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, sku_id, img_name, img_url, product_img_id, is_default
+    from product_sku_image
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, sku_id, img_name, img_url, product_img_id, is_default
+    from product_sku_image
+  </select>
+</mapper>

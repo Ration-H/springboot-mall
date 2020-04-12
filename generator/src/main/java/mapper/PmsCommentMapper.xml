@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PmsCommentMapper">
+  <resultMap id="BaseResultMap" type="pojo.PmsComment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="user_nick_name" jdbcType="VARCHAR" property="userNickName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="star" jdbcType="INTEGER" property="star" />
+    <result column="user_ip" jdbcType="VARCHAR" property="userIp" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="show_status" jdbcType="INTEGER" property="showStatus" />
+    <result column="product_attribute" jdbcType="VARCHAR" property="productAttribute" />
+    <result column="collect_couont" jdbcType="INTEGER" property="collectCouont" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="pics" jdbcType="VARCHAR" property="pics" />
+    <result column="user_head_img" jdbcType="VARCHAR" property="userHeadImg" />
+    <result column="replay_count" jdbcType="INTEGER" property="replayCount" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.PmsComment">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pms_comment (id, product_id, user_nick_name, 
+      product_name, star, user_ip, 
+      create_time, show_status, product_attribute, 
+      collect_couont, read_count, pics, 
+      user_head_img, replay_count, content
+      )
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{userNickName,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{star,jdbcType=INTEGER}, #{userIp,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{showStatus,jdbcType=INTEGER}, #{productAttribute,jdbcType=VARCHAR}, 
+      #{collectCouont,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, #{pics,jdbcType=VARCHAR}, 
+      #{userHeadImg,jdbcType=VARCHAR}, #{replayCount,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.PmsComment">
+    update pms_comment
+    set product_id = #{productId,jdbcType=BIGINT},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      star = #{star,jdbcType=INTEGER},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      show_status = #{showStatus,jdbcType=INTEGER},
+      product_attribute = #{productAttribute,jdbcType=VARCHAR},
+      collect_couont = #{collectCouont,jdbcType=INTEGER},
+      read_count = #{readCount,jdbcType=INTEGER},
+      pics = #{pics,jdbcType=VARCHAR},
+      user_head_img = #{userHeadImg,jdbcType=VARCHAR},
+      replay_count = #{replayCount,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, product_id, user_nick_name, product_name, star, user_ip, create_time, 
+    show_status, product_attribute, collect_couont, read_count, pics, user_head_img, 
+    replay_count, content
+    from pms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_id, user_nick_name, product_name, star, user_ip, create_time, 
+    show_status, product_attribute, collect_couont, read_count, pics, user_head_img, 
+    replay_count, content
+    from pms_comment
+  </select>
+</mapper>

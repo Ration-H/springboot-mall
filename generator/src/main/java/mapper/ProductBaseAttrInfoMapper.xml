@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductBaseAttrInfoMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductBaseAttrInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
+    <result column="catalog3_id" jdbcType="BIGINT" property="catalog3Id" />
+    <result column="is_enabled" jdbcType="VARCHAR" property="isEnabled" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_base_attr_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductBaseAttrInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_base_attr_info (id, attr_name, catalog3_id, 
+      is_enabled)
+    values (#{id,jdbcType=BIGINT}, #{attrName,jdbcType=VARCHAR}, #{catalog3Id,jdbcType=BIGINT}, 
+      #{isEnabled,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductBaseAttrInfo">
+    update product_base_attr_info
+    set attr_name = #{attrName,jdbcType=VARCHAR},
+      catalog3_id = #{catalog3Id,jdbcType=BIGINT},
+      is_enabled = #{isEnabled,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, attr_name, catalog3_id, is_enabled
+    from product_base_attr_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, attr_name, catalog3_id, is_enabled
+    from product_base_attr_info
+  </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductSkuAttrValueMapper">
+  <resultMap id="BaseResultMap" type="pojo.ProductSkuAttrValue">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="attr_id" jdbcType="BIGINT" property="attrId" />
+    <result column="value_id" jdbcType="BIGINT" property="valueId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product_sku_attr_value
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.ProductSkuAttrValue">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_sku_attr_value (id, attr_id, value_id, 
+      sku_id)
+    values (#{id,jdbcType=BIGINT}, #{attrId,jdbcType=BIGINT}, #{valueId,jdbcType=BIGINT}, 
+      #{skuId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.ProductSkuAttrValue">
+    update product_sku_attr_value
+    set attr_id = #{attrId,jdbcType=BIGINT},
+      value_id = #{valueId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, attr_id, value_id, sku_id
+    from product_sku_attr_value
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, attr_id, value_id, sku_id
+    from product_sku_attr_value
+  </select>
+</mapper>

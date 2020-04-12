@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PmsBrandMapper">
+  <resultMap id="BaseResultMap" type="pojo.PmsBrand">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="first_letter" jdbcType="VARCHAR" property="firstLetter" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="factory_status" jdbcType="INTEGER" property="factoryStatus" />
+    <result column="show_status" jdbcType="INTEGER" property="showStatus" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="product_comment_count" jdbcType="INTEGER" property="productCommentCount" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="big_pic" jdbcType="VARCHAR" property="bigPic" />
+    <result column="brand_story" jdbcType="LONGVARCHAR" property="brandStory" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pms_brand
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pojo.PmsBrand">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pms_brand (id, name, first_letter, 
+      sort, factory_status, show_status, 
+      product_count, product_comment_count, logo, 
+      big_pic, brand_story)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{firstLetter,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{factoryStatus,jdbcType=INTEGER}, #{showStatus,jdbcType=INTEGER}, 
+      #{productCount,jdbcType=INTEGER}, #{productCommentCount,jdbcType=INTEGER}, #{logo,jdbcType=VARCHAR}, 
+      #{bigPic,jdbcType=VARCHAR}, #{brandStory,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pojo.PmsBrand">
+    update pms_brand
+    set name = #{name,jdbcType=VARCHAR},
+      first_letter = #{firstLetter,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      factory_status = #{factoryStatus,jdbcType=INTEGER},
+      show_status = #{showStatus,jdbcType=INTEGER},
+      product_count = #{productCount,jdbcType=INTEGER},
+      product_comment_count = #{productCommentCount,jdbcType=INTEGER},
+      logo = #{logo,jdbcType=VARCHAR},
+      big_pic = #{bigPic,jdbcType=VARCHAR},
+      brand_story = #{brandStory,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, first_letter, sort, factory_status, show_status, product_count, 
+    product_comment_count, logo, big_pic, brand_story
+    from pms_brand
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, first_letter, sort, factory_status, show_status, product_count, 
+    product_comment_count, logo, big_pic, brand_story
+    from pms_brand
+  </select>
+</mapper>
