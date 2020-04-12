@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductSkuInfo implements Serializable {
@@ -17,13 +18,13 @@ public class ProductSkuInfo implements Serializable {
     @JSONField(name = "spuId")
     private Long productId;
 
-    private Double price;
+    private BigDecimal price;
 
     private String skuName;
 
     private String skuDesc;
 
-    private Double weight;
+    private BigDecimal weight;
 
     private Long tmId;
 
@@ -32,16 +33,13 @@ public class ProductSkuInfo implements Serializable {
     private String skuDefaultImg;
 
     @Transient
-    @JSONField(name="skuImageList")
-    List<ProductSkuImage> productSkuImageList;
+    List<ProductSkuImage> skuImageList;
 
     @Transient
-    @JSONField(name="skuAttrValueList")
-    List<ProductSkuAttrValue> productSkuAttrValueList;
+    List<ProductSkuAttrValue> skuAttrValueList;
 
     @Transient
-    @JSONField(name="skuSaleAttrValueList")
-    List<ProductSkuSaleAttrValue> productSkuSaleAttrValueList;
+    List<ProductSkuSaleAttrValue> skuSaleAttrValueList;
 
     public Long getId() {
         return id;
@@ -59,11 +57,11 @@ public class ProductSkuInfo implements Serializable {
         this.productId = productId;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -83,11 +81,11 @@ public class ProductSkuInfo implements Serializable {
         this.skuDesc = skuDesc;
     }
 
-    public Double getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
@@ -115,27 +113,28 @@ public class ProductSkuInfo implements Serializable {
         this.skuDefaultImg = skuDefaultImg;
     }
 
-    public List<ProductSkuImage> getProductSkuImageList() {
-        return productSkuImageList;
+    public List<ProductSkuImage> getSkuImageList() {
+        return skuImageList;
     }
 
-    public void setProductSkuImageList(List<ProductSkuImage> productSkuImageList) {
-        this.productSkuImageList = productSkuImageList;
+    public void setSkuImageList(List<ProductSkuImage> skuImageList) {
+        this.skuImageList = skuImageList;
     }
 
-    public List<ProductSkuAttrValue> getProductSkuAttrValueList() {
-        return productSkuAttrValueList;
+    public List<ProductSkuAttrValue> getSkuAttrValueList() {
+        return skuAttrValueList;
     }
 
-    public void setProductSkuAttrValueList(List<ProductSkuAttrValue> productSkuAttrValueList) {
-        this.productSkuAttrValueList = productSkuAttrValueList;
+    public void setSkuAttrValueList(List<ProductSkuAttrValue> skuAttrValueList) {
+        this.skuAttrValueList = skuAttrValueList;
     }
 
-    public List<ProductSkuSaleAttrValue> getProductSkuSaleAttrValueList() {
-        return productSkuSaleAttrValueList;
+    public List<ProductSkuSaleAttrValue> getSkuSaleAttrValueList() {
+        return skuSaleAttrValueList;
     }
 
-    public void setProductSkuSaleAttrValueList(List<ProductSkuSaleAttrValue> productSkuSaleAttrValueList) {
-        this.productSkuSaleAttrValueList = productSkuSaleAttrValueList;
+    public void setSkuSaleAttrValueList(List<ProductSkuSaleAttrValue> skuSaleAttrValueList) {
+        this.skuSaleAttrValueList = skuSaleAttrValueList;
     }
+
 }

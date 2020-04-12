@@ -1,7 +1,5 @@
 package com.gdou.mall.pojo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +21,10 @@ public class ProductSpuInfo implements Serializable {
     private Long tmId;
 
     @Transient
-    @JSONField(name = "spuSaleAttrList")
-    private List<ProductSpuSaleAttr> productSpuSaleAttrList;
+    private List<ProductSpuSaleAttr> spuSaleAttrList;
 
     @Transient
-    @JSONField(name = "spuImageList")
-    private List<ProductSpuImage> productSpuImageList;
+    private List<ProductSpuImage> spuImageList;
 
     public Long getId() {
         return id;
@@ -70,19 +66,19 @@ public class ProductSpuInfo implements Serializable {
         this.tmId = tmId;
     }
 
-    public List<ProductSpuSaleAttr> getProductSpuSaleAttrList() {
-        return productSpuSaleAttrList;
+    public List<ProductSpuSaleAttr> getSpuSaleAttrList() {
+        return spuSaleAttrList;
     }
 
-    public void setProductSpuSaleAttrList(List<ProductSpuSaleAttr> productSpuSaleAttrList) {
-        this.productSpuSaleAttrList = productSpuSaleAttrList;
+    public void setSpuSaleAttrList(List<ProductSpuSaleAttr> spuSaleAttrList) {
+        this.spuSaleAttrList = spuSaleAttrList;
     }
 
-    public List<ProductSpuImage> getProductSpuImageList() {
-        return productSpuImageList;
+    public List<ProductSpuImage> getSpuImageList() {
+        return spuImageList;
     }
 
-    public void setProductSpuImageList(List<ProductSpuImage> productSpuImageList) {
-        this.productSpuImageList = productSpuImageList;
+    public void setSpuImageList(List<ProductSpuImage> spuImageList) {
+        this.spuImageList = spuImageList;
     }
 }

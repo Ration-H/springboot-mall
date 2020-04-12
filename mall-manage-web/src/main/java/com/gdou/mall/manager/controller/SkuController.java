@@ -23,8 +23,8 @@ public class SkuController {
 
         //处理默认图片
         if(StringUtils.isBlank(productSkuInfo.getSkuDefaultImg())){
-            productSkuInfo.setSkuDefaultImg(productSkuInfo.getProductSkuImageList().get(0).getImgUrl());
-            productSkuInfo.getProductSkuImageList().get(0).setIsDefault("1");
+            productSkuInfo.setSkuDefaultImg(productSkuInfo.getSkuImageList().get(0).getImgUrl());
+            productSkuInfo.getSkuImageList().get(0).setIsDefault("1");
         }
 
         Integer result = skuService.saveSkuInfo(productSkuInfo);

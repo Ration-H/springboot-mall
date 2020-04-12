@@ -1,8 +1,8 @@
 package com.gdou.mall.user.service.impl;
 
+import com.gdou.mall.service.UserService;
 import com.gdou.mall.user.mapper.UserMapper;
-import com.gdou.mall.user.pojo.User;
-import com.gdou.mall.user.service.UserService;
+import com.gdou.mall.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

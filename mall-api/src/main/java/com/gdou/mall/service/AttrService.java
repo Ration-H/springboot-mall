@@ -5,6 +5,7 @@ import com.gdou.mall.pojo.ProductBaseAttrValue;
 import com.gdou.mall.pojo.ProductBaseSaleAttr;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AttrService {
     List<ProductBaseAttrInfo> attrInfoList(Long catalog3Id);
@@ -14,4 +15,6 @@ public interface AttrService {
     List<ProductBaseAttrValue> getAttrValueList(Long attrId);
 
     List<ProductBaseSaleAttr> baseSaleAttrList();
+
+    List<ProductBaseAttrInfo> getAttrValueListByValueId(Set<Long> valueIdSet);
 }

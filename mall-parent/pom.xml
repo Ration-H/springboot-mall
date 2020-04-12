@@ -33,6 +33,8 @@
         <jna.version>4.5.1</jna.version>
         <beanUtils.version>1.9.3</beanUtils.version>
         <fastdfs-client-java-version>1.27</fastdfs-client-java-version>
+        <jest-version>5.3.3</jest-version>
+        <jna-version>4.5.1</jna-version>
     </properties>
 
     <groupId>com.gdou</groupId>
@@ -148,6 +150,21 @@
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>${beanUtils.version}</version>
+            </dependency>
+
+            <!--es依赖包-->
+            <dependency>
+                <groupId>io.searchbox</groupId>
+                <artifactId>jest</artifactId>
+                <version>${jest-version}</version>
+            </dependency>
+
+            <!--es依赖包-->
+            <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>${jna-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

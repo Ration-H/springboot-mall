@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.mall.manage.mapper.ProductSpuSaleAttrMapper">
+
+    <resultMap id="spuSaleAttrListCheckBySkuResultMap" type="ProductSpuSaleAttr" autoMapping="true">
+        <result column="spusa_id" property="id"></result>
+        <collection property="spuSaleAttrValueList" ofType="ProductSpuSaleAttrValue" autoMapping="true">
+            <result column="spusav_id" property="id"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectSpuSaleAttrListCheckBySku" resultMap="spuSaleAttrListCheckBySkuResultMap">
+        SELECT
+        spusa.id as spusa_id, spusav.id as spusav_id,IF(skusav.sku_id,1,0) AS isCheck
+        FROM
+        product_spu_sale_attr spusa
+        INNER JOIN `product_spu_sale_attr_value` spusav
+        ON spusa.product_id = spusav.`product_id`
+        AND spusa.sale_attr_id = spusav.`sale_attr_id`
+        AND spusa.product_id = #{productId}
+        LEFT JOIN product_sku_sale_attr_value skusav
+        ON spusa.sale_attr_id = skusav.`sale_attr_id`
+        AND spusav.`id` = skusav.`sale_attr_value_id`
+        AND sku_id = #{skuId}
+    </select>
+
+</mapper>

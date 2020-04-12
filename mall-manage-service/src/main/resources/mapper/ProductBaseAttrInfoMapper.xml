@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdou.mall.manage.mapper.ProductBaseAttrInfoMapper">
+    <resultMap id="productBaseAttrInfoResultMap" type="ProductBaseAttrInfo" autoMapping="true">
+        <id column="ai_id" property="id"></id>
+        <collection property="attrValueList" ofType="ProductBaseAttrValue" autoMapping="true">
+            <id column="av_id" property="id"></id>
+        </collection>
+    </resultMap>
+
+    <select id="selectAttrValueListByValueId" resultMap="productBaseAttrInfoResultMap">
+        SELECT
+        ai.id as ai_id,ai.*,av.id as av_id,av.*
+        FROM
+        `product_base_attr_info` ai,
+        `product_base_attr_value` av
+        WHERE ai.`id` = av.`attr_id`
+        AND av.`id` IN (${valueIds})
+    </select>
+</mapper>

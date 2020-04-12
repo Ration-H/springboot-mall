@@ -8,9 +8,11 @@ import com.gdou.mall.pojo.ProductBaseAttrInfo;
 import com.gdou.mall.pojo.ProductBaseAttrValue;
 import com.gdou.mall.pojo.ProductBaseSaleAttr;
 import com.gdou.mall.service.AttrService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AttrServiceImpl implements AttrService {
@@ -24,15 +26,23 @@ public class AttrServiceImpl implements AttrService {
     @Autowired
     ProductBaseSaleAttrMapper productBaseSaleAttrMapper;
 
+    //根据平台属性值id 查询平台属性
+    @Override
+    public List<ProductBaseAttrInfo> getAttrValueListByValueId(Set<Long> valueIdSet) {
+        String valueIds = StringUtils.join(valueIdSet, ",");
+        List<ProductBaseAttrInfo> productBaseAttrInfoList = attrInfoMapper.selectAttrValueListByValueId(valueIds);
+
+        return productBaseAttrInfoList;
+    }
 
     //根据三级分类查询平台属性
     @Override
     public List<ProductBaseAttrInfo> attrInfoList(Long catalog3Id) {
         ProductBaseAttrInfo productBaseAttrInfo = new ProductBaseAttrInfo();
         productBaseAttrInfo.setCatalog3Id(catalog3Id);
-        List<ProductBaseAttrInfo> productBaseAttrInfoList =attrInfoMapper.select(productBaseAttrInfo);
-        for (ProductBaseAttrInfo baseAttrInfo: productBaseAttrInfoList) {
-            ProductBaseAttrValue productBaseAttrValue=new ProductBaseAttrValue();
+        List<ProductBaseAttrInfo> productBaseAttrInfoList = attrInfoMapper.select(productBaseAttrInfo);
+        for (ProductBaseAttrInfo baseAttrInfo : productBaseAttrInfoList) {
+            ProductBaseAttrValue productBaseAttrValue = new ProductBaseAttrValue();
             productBaseAttrValue.setAttrId(baseAttrInfo.getId());
             List<ProductBaseAttrValue> productBaseAttrValueList = attrValueMapper.select(productBaseAttrValue);
             baseAttrInfo.setAttrValueList(productBaseAttrValueList);
@@ -96,8 +106,11 @@ public class AttrServiceImpl implements AttrService {
         return attrValues;
     }
 
+    //查询所有销售属性
     @Override
     public List<ProductBaseSaleAttr> baseSaleAttrList() {
         return productBaseSaleAttrMapper.selectAll();
     }
+
+
 }

@@ -12,6 +12,9 @@
 |IDEA |   2018   |√|   |
 |Zookeeper |   2018   | |  √ |
 |FastDFS |   2018   | |  √ |
+|Nginx |   2018   | |  √ |
+|ES |   6   | |  √ |
+|kibana |   6   | |  √ |
 
 各个模块端口
 
@@ -23,6 +26,9 @@
 |manage-service|   8070   |
 |user-web    |   8081   |  
 |user-service|   8071   |
+|item-web|   8082   |
+|search-web|   8083   |
+|search-service|   8073   |
 
 
 ----------
@@ -43,7 +49,7 @@ Tip 1：
    因为`mysql8.0`版本要求更加细化      
 2. 因为使用了tk.mybatis的通用Mapper，MBG理论上不用生成Mapper接口和xml文件   
    启动类的`@MapperScan`要使用tk.mybatis的，我们的Mapper接口要继承tk的Mapper<Class>类     
-3. 使用idea+mvaen+java代码生成文件时，路径要使用`绝对路径`。原因未解决  
+3. 使用`idea+mvaen+java代码逆向工程`生成文件时，路径要使用`绝对路径`。原因未解决  
 
 ----------
 Tip 2：
@@ -55,26 +61,30 @@ Tip 2：
 ----------
 Tip 3:
 1. 今天启动项目怎么也`连不上ZooKeeper`，报 `ERROR zkclient.ZkClientWrapper: [DUBBO] Timeout! zookeeper server can not be connected in : 30000ms!, dubbo version: 2.0.0, current host: 127.0.0.1`
-   原因：因为我一次性启动了多个项目，导致连接时间过长
-   解决：**项目一个个启动**  **设置Zookeeper连接超时时间，`spring.dubbo.registry.timeout`**
-2. 由于`前后端分离`，后端Controller要加`@CrossOrigin`
-3. `增删改`都在一个ServiceImpl的`同一个方法`里处理，非常有意思
-   方法位置`com.gdou.mall.manage.service.impl.AttrServiceImpl.saveAttrInfo`
+   原因：因为我一次性启动了多个项目，导致连接时间过长  
+   解决：1. 项目一个个启动  
+         2. 设置Zookeeper连接超时时间，`spring.dubbo.registry.timeout`  
+2. 由于`前后端分离`，后端Controller要加`@CrossOrigin`  
+3. `增删改`都在一个ServiceImpl的`同一个方法`里处理，非常有意思  
+   方法位置`com.gdou.mall.manage.service.impl.AttrServiceImpl.saveAttrInfo`  
    
 ---------
 Tip 4:
-1. 使用了@JSONField绑定不上数据；
-   原因：SpringBoot默认使用jackSon
-   [解决办法](https://blog.csdn.net/xuqingge/article/details/53561529) 
-2. Linux部署FastDFS时，没有storage服务
-   原因：`tracker_server=127.0.0.1:22122`，虽然tracker和storage都在同一台虚拟机上，但是`不能用127.0.0.1`  
-   解决：tracker_server=trackerIP:22122
+1. 使用了@JSONField绑定不上数据； 
+   原因：SpringBoot默认使用jackSon  
+   [解决办法](https://blog.csdn.net/xuqingge/article/details/53561529)   
+2. Linux部署FastDFS时，没有storage服务  
+   原因：`tracker_server=127.0.0.1:22122`，虽然tracker和storage都在同一台虚拟机上，但是`不能用127.0.0.1`   
+   解决：tracker_server=trackerIP:22122  
    
 --------
 Tip 5:
-1. Controller上传图片到FastDFS过程中`连不上Storage服务`
-   原因：Linux`没开放23000端口`
-   解决：iptables`开放23000端口`，ps：`Tracker Server端口`：`22122`
-2. 访问图片时不能显示图片，`<img src="192.168.141.128/group1/M00/00/00/wKiNgF6IhLOAG6y8AATrdYpbQmQ186.png">`
-   原因：src路径`没加http//:`，会被自动加上`http//:localhost:8080/项目名`
-   解决：存储Img src时`加上http//:`
+1. Controller上传图片到FastDFS过程中`连不上Storage服务`  
+   原因：Linux`没开放23000端口`  
+   解决：iptables`开放23000端口`，ps：`Tracker Server端口`：`22122`  
+2. 访问图片时不能显示图片，`<img src="192.168.141.128/group1/M00/00/00/wKiNgF6IhLOAG6y8AATrdYpbQmQ186.png">`  
+   原因：src路径`没加http//:`，会被自动加上`http//:localhost:8080/项目名`  
+   解决：存储Img src时`加上http//:`  
+   
+----------
+Tip 6:
