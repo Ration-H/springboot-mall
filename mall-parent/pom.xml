@@ -35,6 +35,7 @@
         <fastdfs-client-java-version>1.27</fastdfs-client-java-version>
         <jest-version>5.3.3</jest-version>
         <jna-version>4.5.1</jna-version>
+        <jjwt-version>0.9.0</jjwt-version>
     </properties>
 
     <groupId>com.gdou</groupId>
@@ -165,6 +166,13 @@
                 <groupId>net.java.dev.jna</groupId>
                 <artifactId>jna</artifactId>
                 <version>${jna-version}</version>
+            </dependency>
+
+            <!--生成Token依赖的jar-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

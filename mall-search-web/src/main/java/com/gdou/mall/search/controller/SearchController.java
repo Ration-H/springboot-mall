@@ -1,19 +1,18 @@
 package com.gdou.mall.search.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.gdou.mall.LoginRequired;
 import com.gdou.mall.pojo.*;
 import com.gdou.mall.service.AttrService;
 import com.gdou.mall.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
 @Controller
-@CrossOrigin
 public class SearchController {
     @Reference
     SearchService searchService;
@@ -23,6 +22,7 @@ public class SearchController {
 
     //首页请求
     @RequestMapping("index")
+    @LoginRequired(mustLogin = false)
     public String index() {
         return "index";
     }

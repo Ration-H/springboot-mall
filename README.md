@@ -20,15 +20,18 @@
 
 |     模块   |   端口   |
 |:----------:|  :----:  |
-|user    |   8090   |  
+|user    |     8090   |  
 |mall-admin|   8888   |
-|manage-web    |   8080   |  
-|manage-service|   8070   |
-|user-web    |   8081   |  
-|user-service|   8071   |
-|item-web|   8082   |
+|manage-web  | 8080   |  
+|manage-service|     8070   |
+|user-web    | 8081   |  
+|user-service|       8071   |
+|item-web|     8082   |
 |search-web|   8083   |
-|search-service|   8073   |
+|search-service|     8073   |
+|cart-web|     8084   |
+|cart-service|       8074   |
+|passport-web| 8085  |
 
 
 ----------
@@ -88,3 +91,6 @@ Tip 5:
    
 ----------
 Tip 6:
+1. 今天的大坑，id为Long类型，id作为值存入Map<String,Object>,即Long类型转为Object，  
+   当从Map出来时，以String类型封装id，此时应该会报`java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.String`  
+   但是，SpringBoot却报`NullPointException`，而且不debug到具体语句，也不会报具体的异常点，导致异常非常难找
