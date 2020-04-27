@@ -10,9 +10,9 @@
 |Tomcat |   8   |√| √  |
 |Mysql |   5   |√|   |
 |IDEA |   2018   |√|   |
-|Zookeeper |   2018   | |  √ |
-|FastDFS |   2018   | |  √ |
-|Nginx |   2018   | |  √ |
+|Zookeeper |      | |  √ |
+|FastDFS |      | |  √ |
+|Nginx |      | |  √ |
 |ES |   6   | |  √ |
 |kibana |   6   | |  √ |
 
