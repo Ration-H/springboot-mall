@@ -17,7 +17,6 @@ buildNumber.properties
 **/target/
 
 .idea
-data
 mall-admin
 **/*.iml
 **/.gitignore
