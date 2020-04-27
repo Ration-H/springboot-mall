@@ -40,7 +40,7 @@ public class PassportController {
             }
         }
 
-        System.out.println(JSON.toJSONString(resultMap));
+        //System.out.println(JSON.toJSONString(resultMap));
         return JSON.toJSONString(resultMap);
     }
 

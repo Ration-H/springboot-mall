@@ -1,7 +1,7 @@
 package com.gdou.mall.user.controller;
 
 
-import com.gdou.mall.pojo.User;
+import com.gdou.mall.pojo.UserInfo;
 import com.gdou.mall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +18,8 @@ public class UserController {
 
     @RequestMapping("getAll")
     @ResponseBody
-    public List<User> getAll(){
-        List<User> userList=userService.getAll();
+    public List<UserInfo> getAll(){
+        List<UserInfo> userList=userService.getAll();
         return userList;
     }
 }

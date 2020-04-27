@@ -52,4 +52,12 @@ public class AttrController {
         return attrInfos;
     }
 
+    //删除属性信息
+    @RequestMapping("deleteAttrInfo")
+    @ResponseBody
+    public void deleteAttrInfo(Long attrId) {
+        System.out.println("删除属性");
+        attrService.delAttrInfo(attrId);
+    }
+
 }

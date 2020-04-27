@@ -17,4 +17,6 @@ public interface AttrService {
     List<ProductBaseSaleAttr> baseSaleAttrList();
 
     List<ProductBaseAttrInfo> getAttrValueListByValueId(Set<Long> valueIdSet);
+
+    void delAttrInfo(Long attrId);
 }

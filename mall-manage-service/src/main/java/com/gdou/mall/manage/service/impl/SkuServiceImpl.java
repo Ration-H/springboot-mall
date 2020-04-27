@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -53,6 +54,19 @@ public class SkuServiceImpl implements SkuService {
         }
 
         return productSkuInfoList;
+    }
+
+    //订单查价
+    @Override
+    public boolean checkPrice(Long productSkuId, BigDecimal price) {
+        //从DB中查询数据与NoSQL的数据对比价格是否一致
+        ProductSkuInfo productSkuInfo = productSkuInfoMapper.selectByPrimaryKey(productSkuId);
+        if (productSkuInfo!=null){
+            if (productSkuInfo.getPrice().compareTo(price)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     //获取当前Sku 同系列的Sku

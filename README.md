@@ -29,9 +29,11 @@
 |item-web|     8082   |
 |search-web|   8083   |
 |search-service|     8073   |
-|cart-web|     8084   |
+|cart-web    | 8084   |
 |cart-service|       8074   |
 |passport-web| 8085  |
+|order-service|      8076   |
+|order-web   | 8086  |
 
 
 ----------

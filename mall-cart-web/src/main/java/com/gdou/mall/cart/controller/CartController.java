@@ -36,13 +36,6 @@ public class CartController {
 //        return "success";
 //    }
 
-    //test
-    @RequestMapping("toTrade")
-    @LoginRequired(mustLogin = true)
-    public String toTrade() {
-        return "toTrade";
-    }
-
     //勾选购物车商品，重新记价
     @RequestMapping("checkCart")
     @LoginRequired(mustLogin = false)

@@ -35,6 +35,19 @@ public class AttrServiceImpl implements AttrService {
         return productBaseAttrInfoList;
     }
 
+    //删除属性信息
+    @Override
+    public void delAttrInfo(Long attrId) {
+        if (attrId != null) {
+            //删除属性信息
+            attrInfoMapper.deleteByPrimaryKey(attrId);
+            //删除属性值信息
+            ProductBaseAttrValue productBaseAttrValue = new ProductBaseAttrValue();
+            productBaseAttrValue.setAttrId(attrId);
+            attrValueMapper.delete(productBaseAttrValue);
+        }
+    }
+
     //根据三级分类查询平台属性
     @Override
     public List<ProductBaseAttrInfo> attrInfoList(Long catalog3Id) {
@@ -60,18 +73,20 @@ public class AttrServiceImpl implements AttrService {
     @Override
     public Integer saveAttrInfo(ProductBaseAttrInfo productBaseAttrInfo) {
 
-        List<ProductBaseAttrValue> attrValueList = getAttrValueList(productBaseAttrInfo.getId());
+
         int count = 0;
 
         /*判断该属性是否存在
         存在则更新
          */
-        if (attrInfoMapper.existsWithPrimaryKey(productBaseAttrInfo)) {
+        if (attrInfoMapper.existsWithPrimaryKey(productBaseAttrInfo)) {//存在，更新属性
             count = attrInfoMapper.updateByPrimaryKeySelective(productBaseAttrInfo);
-            //不存在，新增属性
-        } else {
+
+        } else {//不存在，新增属性
             count = attrInfoMapper.insert(productBaseAttrInfo);
         }
+
+        List<ProductBaseAttrValue> attrValueList = getAttrValueList(productBaseAttrInfo.getId());
 
         //删除属性值
         for (ProductBaseAttrValue productBaseAttrValue : attrValueList) {

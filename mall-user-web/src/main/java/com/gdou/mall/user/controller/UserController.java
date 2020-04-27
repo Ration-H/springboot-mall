@@ -2,7 +2,7 @@ package com.gdou.mall.user.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.gdou.mall.pojo.User;
+import com.gdou.mall.pojo.UserInfo;
 import com.gdou.mall.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,8 @@ public class UserController {
 
     @RequestMapping("getAll")
     @ResponseBody
-    public List<User> getAll(){
-        List<User> userList=userService.getAll();
+    public List<UserInfo> getAll(){
+        List<UserInfo> userList=userService.getAll();
         return userList;
     }
 }

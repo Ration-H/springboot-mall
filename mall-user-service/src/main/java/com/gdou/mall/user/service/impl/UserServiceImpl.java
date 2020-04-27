@@ -3,8 +3,10 @@ package com.gdou.mall.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.gdou.mall.pojo.UserInfo;
+import com.gdou.mall.pojo.UserReceiveAddress;
 import com.gdou.mall.service.UserService;
 import com.gdou.mall.user.mapper.UserMapper;
+import com.gdou.mall.user.mapper.UserReceiveAddressMapper;
 import com.gdou.mall.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,25 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     RedisUtil redisUtil;
+
+    @Autowired
+    UserReceiveAddressMapper userReceiveAddressMapper;
+
+    //通过用户Id获取收获地址
+    @Override
+    public List<UserReceiveAddress> getUserReceiveAddressByUserId(Long userId) {
+        UserReceiveAddress userReceiveAddress = new UserReceiveAddress();
+        userReceiveAddress.setUserId(userId);
+        List<UserReceiveAddress> userReceiveAddressList = userReceiveAddressMapper.select(userReceiveAddress);
+        return userReceiveAddressList;
+    }
+
+    //根据地址Id查询用户收货地址信息
+    @Override
+    public UserReceiveAddress getReceiveAddressById(Long deliveryAddressId) {
+        UserReceiveAddress userReceiveAddress = userReceiveAddressMapper.selectByPrimaryKey(deliveryAddressId);
+        return userReceiveAddress;
+    }
 
     @Override
     public List<UserInfo> getAll() {
@@ -85,4 +106,5 @@ public class UserServiceImpl implements UserService {
         }
         return reuslt;
     }
+
 }
