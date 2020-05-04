@@ -58,18 +58,22 @@ public class CartServiceImpl implements CartService {
 
             List<OrderCartItem> orderCartItemList = orderCartItemMapper.select(orderCartItem);
 
-            Map<String, String> cartItemMap = new TreeMap<>();
-            for (OrderCartItem cartItem : orderCartItemList) {
-                cartItemMap.put(cartItem.getId() + "", JSON.toJSONString(cartItem));
-            }
+            if (orderCartItemList != null && orderCartItemList.size() != 0) {
+                Map<String, String> cartItemMap = new TreeMap<>();
+                for (OrderCartItem cartItem : orderCartItemList) {
+                    cartItemMap.put(cartItem.getId() + "", JSON.toJSONString(cartItem));
+                }
 
-            jedis = redisUtil.getJedis();
-            jedis.del("user:" + userId + ":cart");
-            jedis.hmset("user:" + userId + ":cart", cartItemMap);
+                jedis = redisUtil.getJedis();
+                jedis.del("user:" + userId + ":cart");
+                jedis.hmset("user:" + userId + ":cart", cartItemMap);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            jedis.close();
+            if (jedis != null) {
+                jedis.close();
+            }
         }
     }
 

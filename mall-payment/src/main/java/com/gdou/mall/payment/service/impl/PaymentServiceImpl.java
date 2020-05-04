@@ -58,6 +58,7 @@ public class PaymentServiceImpl implements PaymentService {
         Map<String, String> message = new HashMap<>();
         message.put("out_trade_no", out_trade_no);
         message.put("pay_type", paymentInfo.getPayType() + "");
+        message.put("total_amount",paymentInfo.getTotalAmount().toString());
 
         try {
             //更新支付信息并发送消息

@@ -10,6 +10,7 @@ import com.gdou.mall.service.CartService;
 import com.gdou.mall.service.OrderService;
 import com.gdou.mall.utils.ActiveMQUtil;
 import com.gdou.mall.utils.RedisUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import tk.mybatis.mapper.entity.Example;
@@ -130,6 +131,27 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return result;
+    }
+
+    //获取所有订单信息
+    @Override
+    public List<OrderInfo> getOrderList() {
+        return orderInfoMapper.selectAll();
+    }
+
+    //根据查询条件查询订单
+    @Override
+    public List<OrderInfo> getOrderByCondition(String username, String startDate, String endDate) {
+        Example example = new Example(OrderInfo.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(username)){
+            criteria.andLike("userUsername", "%"+username+"%");
+        }
+        if (StringUtils.isNotBlank(startDate)&&StringUtils.isNotBlank(endDate)){
+            criteria.andBetween("modifyTime",startDate,endDate);
+        }
+        List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(example);
+        return orderInfoList;
     }
 
 }

@@ -79,8 +79,9 @@ public class SearchController {
             }
             modelMap.put("attrValueSelectedList", productSearchCrumbList);
         }
-
-
+        if (StringUtils.isNotBlank(productSearchParam.getKeyword())){
+            modelMap.put("keyword",productSearchParam.getKeyword());
+        }
         return "list";
     }
 
@@ -101,10 +102,10 @@ public class SearchController {
         }
 
         if (StringUtils.isNotBlank(keyword)) {
-            if (StringUtils.isNotBlank(urlParam)) {
+            if (StringUtils.isNotBlank(keyword)) {
                 urlParam += "&";
             }
-            urlParam += "catalog3Id=" + keyword;
+            urlParam += "keyword=" + keyword;
         }
 
         if (valueIds != null && valueIds.length != 0) {

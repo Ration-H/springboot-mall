@@ -2,9 +2,11 @@ package com.gdou.mall.search.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gdou.mall.pojo.ProductSearchParam;
+import com.gdou.mall.pojo.ProductSkuInfo;
 import com.gdou.mall.pojo.ProductSkuInfoSearch;
 import com.gdou.mall.service.SearchService;
 import io.searchbox.client.JestClient;
+import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +16,7 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -62,6 +65,14 @@ public class SearchServiceImpl implements SearchService {
         return productSkuInfoSearchList;
     }
 
+    //后台添加Sku，ES同步更新
+    @Override
+    public void updateEsInfo(ProductSkuInfo productSkuInfo) throws IOException {
+        ProductSkuInfoSearch productSkuInfoSearch=new ProductSkuInfoSearch();
+        BeanUtils.copyProperties(productSkuInfo,productSkuInfoSearch);
+        Index put=new Index.Builder(productSkuInfoSearch).index("mall").type("ProductSkuInfo").id(productSkuInfoSearch.getId()+"").build();
+        jestClient.execute(put);
+    }
 
     //生成dsl语句
     private String getDsl(ProductSearchParam productSearchParam) {

@@ -16,7 +16,7 @@
     <div class="header_head_box">
         <b class="header_head_p">
             <div style="overflow: hidden">
-                <a href="#" class="header_head_p_a1">
+                <a href="http://localhost:8083/index" class="header_head_p_a1">
                     首页
                 </a>
             </div>
@@ -24,7 +24,7 @@
         </b>
         <ul>
             <li>
-                <a href="#" class="li_2">你好，请登录</a>
+                <a th:href="'http://localhost:8085/index.html?ReturnUrl=http://localhost:8083/list.html?keyword='+${keyword}" class="li_2">你好，请登录</a>
             </li>
         
         </ul>
@@ -34,15 +34,15 @@
 <!--搜索导航-->
 <div class="header_sous">
     <div class="logo">
-        <a href="#"><img src="/list/image/at.jpg" alt="" width="180px" height="70px"></a>
+        <a href="http://localhost:8083/index"><img src="/list/image/tm.png" alt="" width="190px" height="28px"></a>
     </div>
     <div class="header_form">
-        <input id="keyword" name="keyword" type="text" placeholder="手机" />
+        <input id="keyword" name="keyword" type="text" th:placeholder="${keyword}" />
         <a href="#" onclick="searchList()">搜索</a>
     </div>
     <div class="header_ico">
         <div class="header_gw">
-            <span><a href="#">我的购物车</a></span>
+            <span><a href="http://localhost:8084/cartList">我的购物车</a></span>
             <img src="/list/image/settleup-@1x.png" />
             <span>0</span>
         </div>
@@ -73,8 +73,6 @@
         <span th:if="${keyword}!=null" th:text="'&quot;'+${keyword}+'&quot;'">&quot;小米&quot;</span>
         <a class="select-attr"   th:each="baseAttrValueSelected:${attrValueSelectedList}"    th:href="'list.html?'+${baseAttrValueSelected.urlParam}"   th:utext=" ${baseAttrValueSelected.valueName} +'<b> ✖ </b>'"  > 2G<b> ✖ </b>
         </a>
-        <!-- <a class="select-attr"   href="#"      > 屏幕尺寸:5.1-5.5英寸<b> ✖ </b>
-        </a>-->
 
     </div>
 </div>
@@ -401,7 +399,7 @@
 <script language="JavaScript">
     function item(skuid) {
         console.log("skuid:"+skuid);
-        window.location.href="http://item.gmall.com:8084/"+skuid+".html";
+        window.location.href="http://localhost:8082/"+skuid+".html";
     }
 
     function searchList(){

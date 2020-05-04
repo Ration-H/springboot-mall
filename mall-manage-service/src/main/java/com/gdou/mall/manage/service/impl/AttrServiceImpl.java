@@ -48,6 +48,15 @@ public class AttrServiceImpl implements AttrService {
         }
     }
 
+    //批量删除
+    @Override
+    public void delAttrInfoBash(String ids) {
+        //批量删除属性
+        attrInfoMapper.deleteByPrimaryKeyBash(ids);
+        //批量删除属性值
+        attrValueMapper.deleteByAttrIdBash(ids);
+    }
+
     //根据三级分类查询平台属性
     @Override
     public List<ProductBaseAttrInfo> attrInfoList(Long catalog3Id) {
@@ -72,7 +81,6 @@ public class AttrServiceImpl implements AttrService {
      */
     @Override
     public Integer saveAttrInfo(ProductBaseAttrInfo productBaseAttrInfo) {
-
 
         int count = 0;
 

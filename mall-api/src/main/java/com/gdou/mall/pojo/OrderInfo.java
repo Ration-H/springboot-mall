@@ -1,5 +1,7 @@
 package com.gdou.mall.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -90,14 +92,19 @@ public class OrderInfo implements Serializable {
 
     private Integer useIntegration;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date paymentTime;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date deliveryTime;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date receiveTime;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date commentTime;
 
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     @Transient

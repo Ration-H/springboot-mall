@@ -11,13 +11,18 @@ import com.gdou.mall.pojo.ProductSkuImage;
 import com.gdou.mall.pojo.ProductSkuInfo;
 import com.gdou.mall.pojo.ProductSkuSaleAttrValue;
 import com.gdou.mall.service.SkuService;
+import com.gdou.mall.utils.ActiveMQUtil;
 import com.gdou.mall.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
+import javax.jms.Connection;
+import javax.jms.JMSException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SkuServiceImpl implements SkuService {
@@ -36,6 +41,9 @@ public class SkuServiceImpl implements SkuService {
     @Autowired
     RedisUtil redisUtil;
 
+    @Autowired
+    ActiveMQUtil activeMQUtil;
+
     //获取所有Sku
     @Override
     public List<ProductSkuInfo> getAllSku() {
@@ -43,7 +51,7 @@ public class SkuServiceImpl implements SkuService {
         List<ProductSkuInfo> productSkuInfoList = productSkuInfoMapper.selectAll();
 
         //获取Sku的平台属性值
-        for (ProductSkuInfo productSkuInfo:productSkuInfoList){
+        for (ProductSkuInfo productSkuInfo : productSkuInfoList) {
             Long productSkuInfoId = productSkuInfo.getId();
 
             ProductSkuAttrValue productSkuAttrValue = new ProductSkuAttrValue();
@@ -61,8 +69,8 @@ public class SkuServiceImpl implements SkuService {
     public boolean checkPrice(Long productSkuId, BigDecimal price) {
         //从DB中查询数据与NoSQL的数据对比价格是否一致
         ProductSkuInfo productSkuInfo = productSkuInfoMapper.selectByPrimaryKey(productSkuId);
-        if (productSkuInfo!=null){
-            if (productSkuInfo.getPrice().compareTo(price)==0){
+        if (productSkuInfo != null) {
+            if (productSkuInfo.getPrice().compareTo(price) == 0) {
                 return true;
             }
         }
@@ -92,7 +100,7 @@ public class SkuServiceImpl implements SkuService {
 
     @Override
     public ProductSkuInfo getSkuById(Long skuId) {
-        ProductSkuInfo productSkuInfo =new ProductSkuInfo();
+        ProductSkuInfo productSkuInfo = new ProductSkuInfo();
         //获取Jedis对象
         Jedis jedis = redisUtil.getJedis();
         //从Redis获取Sku
@@ -108,7 +116,7 @@ public class SkuServiceImpl implements SkuService {
         return productSkuInfo;
     }
 
-    //添加Sku
+    //添加Sku,并发送一个MQ，INSERT_SKU_QUEUE
     @Override
     public Integer saveSkuInfo(ProductSkuInfo productSkuInfo) {
         Integer result = productSkuInfoMapper.insertSelective(productSkuInfo);
@@ -132,6 +140,28 @@ public class SkuServiceImpl implements SkuService {
             productSkuSaleAttrValue.setSkuId(productSkuInfoId);
             result += productSkuSaleAttrValueMapper.insertSelective(productSkuSaleAttrValue);
         }
+
+        //发送MQ， 由SearchService消费
+        String skuInfoJson = JSON.toJSONString(productSkuInfo);
+        Map<String, String> message = new HashMap<>();
+        message.put("skuInfo", skuInfoJson);
+
+        Connection connection = null;
+        try {
+            connection = activeMQUtil.getConnectionFactory().createConnection();
+            activeMQUtil.producerSendMap(connection, "INSERT_SKU_QUEUE", message);
+        } catch (JMSException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
 
         return result;
     }

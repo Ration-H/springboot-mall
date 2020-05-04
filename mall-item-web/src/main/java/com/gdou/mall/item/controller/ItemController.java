@@ -49,7 +49,6 @@ public class ItemController {
 
         String skuSaleAttrHashJsonStr  = JSON.toJSONString(productSkuInfoListMap);
         map.put("skuSaleAttrHashJsonStr",skuSaleAttrHashJsonStr);
-
         return "item";
     }
 }

@@ -9,7 +9,7 @@ ul {
 
 body,
 html {
-  background: #F6F6F6;
+  background: #FFFFFF;
   position: relative; }
 
 .top_find {
@@ -75,7 +75,7 @@ html {
     font-size: 12px;
     color: #ffffff;
     background: #999;
-    border-bottom: 1px solid #F6F6F6;
+    border-bottom: 1px solid #FFFFFF;
     text-align: center;
     padding: 3px;
     cursor: pointer; }
@@ -233,17 +233,17 @@ header {
           color: #ccc;
           float: left; }
   header .header_sous {
-    width: 1190px;
+    width: 1290px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    height: 140px; }
+    height: 131px; }
     header .header_sous .header_form {
       overflow: hidden;
       background: #f10215;
       position: absolute;
-      left: 320px;
-      top: 25px;
+      left: 360px;
+      top: 45px;
       width: 550px;
       height: 35px;
       border: 1px solid #f10215; }
@@ -753,7 +753,7 @@ header {
       left: 50%;
       margin: 0px 0px 0px -595px; }
       header .header_main .header_banner1 .a {
-        background: #F6F6F6;
+        background: #FFFFFF;
         display: block;
         overflow: hidden;
         position: absolute;
@@ -882,7 +882,7 @@ header {
 
 .section_second {
   width: 100%;
-  background: #F6F6F6;
+  background: #FFFFFF;
   overflow: hidden;
   margin-bottom: 20px; }
   .section_second .section_second_header {
@@ -1096,7 +1096,7 @@ header {
           display: inline-block;
           width: 0;
           height: 0;
-          border-top: 20px solid #f6f6f6;
+          border-top: 20px solid #FFFFFF;
           border-right: 19px solid transparent;
           position: absolute;
           top: 0;
@@ -1427,7 +1427,7 @@ header {
           display: inline-block;
           width: 0;
           height: 0;
-          border-top: 20px solid #f6f6f6;
+          border-top: 20px solid #FFFFFF;
           border-right: 19px solid transparent;
           position: absolute;
           top: 0;
@@ -1534,7 +1534,7 @@ header {
           display: inline-block;
           width: 0;
           height: 0;
-          border-top: 20px solid #f6f6f6;
+          border-top: 20px solid #FFFFFF;
           border-right: 19px solid transparent;
           position: absolute;
           top: 0;
@@ -1653,7 +1653,7 @@ header {
     .section_xpz .section_xpz_title h3 {
       display: inline-block;
       padding: 0 50px;
-      background: #f6f6f6;
+      background: #FFFFFF;
       font-weight: 400;
       font-size: 26px;
       color: #333; }
@@ -1921,7 +1921,7 @@ header {
     .section_ash .section_ash_title h3 {
       display: inline-block;
       padding: 0 50px;
-      background: #f6f6f6;
+      background: #FFFFFF;
       font-weight: 400;
       font-size: 26px;
       color: #333; }
@@ -8962,7 +8962,7 @@ ul {
     float: right; }
 
 .section_gts {
-  background: #F6F6F6;
+  background: #FFFFFF;
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto; }
@@ -8973,14 +8973,14 @@ ul {
     height: 100px;
     margin: 0 auto;
     text-align: center;
-    border: 1px solid #F6F6F6;
+    border: 1px solid #FFFFFF;
     background: url("../img/xiazai1.png") repeat-x 0 center; }
     .section_gts .gts span {
       width: 178px;
       height: 500px;
       display: block;
       margin: 30px auto;
-      background: #F6F6F6;
+      background: #FFFFFF;
       font-size: 25px; }
   .section_gts ul {
     overflow: hidden;
@@ -9059,7 +9059,7 @@ ul {
     cursor: pointer; }
 
 .section_hmgg {
-  background: #F6F6F6;
+  background: #FFFFFF;
   width: 100%;
   padding-bottom: 30px;
   box-sizing: border-box; }
@@ -9070,14 +9070,14 @@ ul {
     height: 100px;
     margin: 0 auto;
     text-align: center;
-    border: 1px solid #F6F6F6;
+    border: 1px solid #FFFFFF;
     background: url("../img/xiazai1.png") repeat-x 0 center; }
     .section_hmgg .hmgg span {
       width: 178px;
       height: 50px;
       display: block;
       margin: 30px auto;
-      background: #F6F6F6;
+      background: #FFFFFF;
       font-size: 25px; }
   .section_hmgg ul {
     overflow: hidden;

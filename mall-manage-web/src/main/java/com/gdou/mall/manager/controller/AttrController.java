@@ -60,4 +60,11 @@ public class AttrController {
         attrService.delAttrInfo(attrId);
     }
 
+    //批量删除属性信息
+    @RequestMapping("multiDeleteAttrInfo")
+    @ResponseBody
+    public void multiDeleteAttrInfo(String attrIds) {
+        System.out.println("删除属性");
+        attrService.delAttrInfoBash(attrIds);
+    }
 }

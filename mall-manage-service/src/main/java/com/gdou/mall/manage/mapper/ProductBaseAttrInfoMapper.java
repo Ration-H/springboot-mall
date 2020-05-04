@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ProductBaseAttrInfoMapper extends Mapper<ProductBaseAttrInfo> {
     List<ProductBaseAttrInfo> selectAttrValueListByValueId(@Param("valueIds") String valueIds);
+
+    void deleteByPrimaryKeyBash(@Param("attrIds") String attrIds);
 }

@@ -16,4 +16,5 @@ public interface CartService {
     List<OrderCartItem> getCartByUserIdFromCache(Long userId);
 
     int modifyCartByIsCheckedAndSkuId(OrderCartItem orderCartItem);
+
 }

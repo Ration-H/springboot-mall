@@ -15,4 +15,8 @@ public interface UserService {
     List<UserReceiveAddress> getUserReceiveAddressByUserId(Long userId);
 
     UserReceiveAddress getReceiveAddressById(Long deliveryAddressId);
+
+    UserInfo getOauthUserInfoByUid(String uid);
+
+    UserInfo addOauthUser(UserInfo userInfo);
 }

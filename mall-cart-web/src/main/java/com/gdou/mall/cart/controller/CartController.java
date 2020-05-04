@@ -146,9 +146,11 @@ public class CartController {
             }
             //将购物车添加到Cookie中
             CookieUtil.setCookie(request, response, "cartListCookie", JSON.toJSONString(orderCartItemList), 60 * 60 * 24 * 3, true);
-        } else {//用户已登录，将商品放入 DB
+        } else {//用户已登录，合并购物车，并将商品放入DB
+
             //从DB中查出用户的购物车商品
             OrderCartItem orderCartItemFromDB = cartService.getCartByUserId(Long.valueOf(userId), skuId);
+
             //判断用户之前是否添加过该商品
             if (orderCartItemFromDB == null) {//未添加
                 //为商品添加用户信息

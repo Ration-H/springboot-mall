@@ -107,6 +107,7 @@ public class OrderController {
                 //计总价
                 totalPrices = totalPrices.add(orderCartItem.getTotalPrice());
 
+                //TODO 核对库存
                 //查库存
 
                 //将购物车商品封装成订单商品
@@ -125,9 +126,9 @@ public class OrderController {
         }
         //将订单商品封装到订单中
         orderInfo.setOrderItemList(orderItemList);
+        orderInfo.setTotalAmount(totalPrices);
 
-
-        //在DB中生成订单,并删除购物车相应的商品
+        //在DB中生成订单,并删除购物车相应的商品 TODO 开发阶段，暂不删除购物车上的商品
         int result = orderService.addOrderInfo(orderInfo);
 
 

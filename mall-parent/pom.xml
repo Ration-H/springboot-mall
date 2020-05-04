@@ -40,6 +40,26 @@
         <activemq-pool-version>5.15.2</activemq-pool-version>
     </properties>
 
+    <modules>
+        <module>../mall-api</module>
+        <module>../mall-cart-service</module>
+        <module>../mall-cart-web</module>
+        <module>../mall-common-util</module>
+        <module>../mall-item-web</module>
+        <module>../mall-manage-service</module>
+        <module>../mall-manage-web</module>
+        <module>../mall-order-service</module>
+        <module>../mall-order-web</module>
+        <module>../mall-passport-web</module>
+        <module>../mall-payment</module>
+        <module>../mall-search-service</module>
+        <module>../mall-search-web</module>
+        <module>../mall-user-service</module>
+        <module>../mall-user-web</module>
+        <module>../mall-web-util</module>
+        <module>../mall-service-util</module>
+    </modules>
+
     <groupId>com.gdou</groupId>
     <artifactId>mall-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -192,5 +212,28 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>    <!--默认关掉单元测试 -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

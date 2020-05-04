@@ -42,6 +42,22 @@ public class UserServiceImpl implements UserService {
         return userReceiveAddress;
     }
 
+    //根据Uid查询社交登录账号
+    @Override
+    public UserInfo getOauthUserInfoByUid(String uid) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setSourceUid(uid);
+        userInfo = userMapper.selectOne(userInfo);
+        return userInfo;
+    }
+
+    //添加社交登录用户
+    @Override
+    public UserInfo addOauthUser(UserInfo userInfo) {
+        userMapper.insertSelective(userInfo);
+        return userInfo;
+    }
+
     @Override
     public List<UserInfo> getAll() {
         List<UserInfo> users = userMapper.selectAll();

@@ -1,5 +1,7 @@
 package com.gdou.mall.pojo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 public class UserInfo implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long userLevelId;
@@ -46,6 +49,13 @@ public class UserInfo implements Serializable {
     private Integer historyIntegration;
 
     private String token;
+
+    private String sourceUid;
+
+    private String accessToken;
+
+    private String accessCode;
+
 
     public Long getId() {
         return id;
@@ -205,5 +215,29 @@ public class UserInfo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getSourceUid() {
+        return sourceUid;
+    }
+
+    public void setSourceUid(String sourceUid) {
+        this.sourceUid = sourceUid;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
     }
 }

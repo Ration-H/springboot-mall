@@ -60,6 +60,7 @@ public class PaymentController {
             paymentInfo.setCallbackContent(call_back_content);//回调请求字符串
             paymentInfo.setCallbackTime(new Date());
             paymentInfo.setPayType(1);
+            paymentInfo.setTotalAmount(new BigDecimal(total_amount));
             // 更新用户的支付成功状态
             paymentService.updatePayment(paymentInfo);
 
@@ -85,6 +86,7 @@ public class PaymentController {
         Map<String, Object> map = new HashMap<>();
         map.put("out_trade_no", outTradeNo);
         map.put("product_code", "FAST_INSTANT_TRADE_PAY");
+        //TODO 因为测试所以修改价格为0.01
         map.put("total_amount", 0.01);
         map.put("subject", subject);
 
@@ -119,7 +121,7 @@ public class PaymentController {
         return form;
     }
 
-    //微信支付，未开发
+    //TODO 微信支付，未开发
     @RequestMapping("wechatpay/submit")
     @LoginRequired(mustLogin = true)
     public String wechatpay() {

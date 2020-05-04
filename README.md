@@ -96,3 +96,5 @@ Tip 6:
 1. 今天的大坑，id为Long类型，id作为值存入Map<String,Object>,即Long类型转为Object，  
    当从Map出来时，以String类型封装id，此时应该会报`java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.String`  
    但是，SpringBoot却报`NullPointException`，而且不debug到具体语句，也不会报具体的异常点，导致异常非常难找
+2. mybatis in #{}只能修改第一个， 换成${}出现getter错误
+   @Param

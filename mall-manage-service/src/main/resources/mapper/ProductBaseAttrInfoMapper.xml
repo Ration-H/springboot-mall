@@ -17,4 +17,9 @@
         WHERE ai.`id` = av.`attr_id`
         AND av.`id` IN (${valueIds})
     </select>
+
+    <!--批量删除-->
+    <delete id="deleteByPrimaryKeyBash" parameterType="String">
+        DELETE FROM `product_base_attr_info` WHERE id IN (${attrIds});
+    </delete>
 </mapper>
