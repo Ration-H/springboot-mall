@@ -1,6 +1,9 @@
 # springboot-mall
 ##使用springboot实现网上商城
 
+系统架构
+![Image text](https://gitee.com/ashentostudy/study/raw/master/image/systemArchitecture.png)
+
 
 开发环境
 
