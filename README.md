@@ -1,6 +1,9 @@
 # springboot-mall
 ##使用springboot实现网上商城
 
+系统架构
+![Image text](https://gitee.com/ashentostudy/study/raw/master/image/systemArchitecture.png)
+
 
 开发环境
 
@@ -97,9 +100,9 @@ Tip 6:
    当从Map出来时，以String类型封装id，此时应该会报`java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.String`  
    但是，SpringBoot却报`NullPointException`，而且不debug到具体语句，也不会报具体的异常点，导致异常非常难找
 2. mybatis in #{}只能修改第一个， 换成${}出现getter错误
-   @Param  
-     
----------  
+   @Param
+
+---------
 Tip 7:
 1. 今天测试，发现拦截器只拦截某些Handler，
-   原因：SpringBoot启动类不与拦截器类在同一级目录或上级，导致该SpringBoot启动类加载不到该拦截器类  
+   原因：SpringBoot启动类不与拦截器类在同一级目录或上级，导致该SpringBoot启动类加载不到该拦截器类
