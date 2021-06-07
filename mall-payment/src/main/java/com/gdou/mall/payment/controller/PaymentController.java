@@ -61,6 +61,11 @@ public class PaymentController {
             paymentInfo.setCallbackTime(new Date());
             paymentInfo.setPayType(1);
             paymentInfo.setTotalAmount(new BigDecimal(total_amount));
+
+//            OrderInfo orderInfoByOutTradeNo = orderService.getOrderInfoByOutTradeNo(out_trade_no);
+//            orderInfoByOutTradeNo.setStatus(1);
+//            orderService.updateOrderInfo(orderInfoByOutTradeNo);
+
             // 更新用户的支付成功状态
             paymentService.updatePayment(paymentInfo);
 
@@ -87,7 +92,7 @@ public class PaymentController {
         map.put("out_trade_no", outTradeNo);
         map.put("product_code", "FAST_INSTANT_TRADE_PAY");
         //TODO 因为测试所以修改价格为0.01
-        map.put("total_amount", 0.01);
+        map.put("total_amount", totalPrices);
         map.put("subject", subject);
 
         String param = JSON.toJSONString(map);

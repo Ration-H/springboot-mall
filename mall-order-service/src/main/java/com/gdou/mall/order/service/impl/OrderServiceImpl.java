@@ -111,6 +111,7 @@ public class OrderServiceImpl implements OrderService {
         Connection connection=null;
 
         Example example = new Example(OrderInfo.class);
+
         example.createCriteria().andEqualTo("orderSn", orderInfo.getOrderSn());
 
        String message="订单已支付，叫物流尽快发货";

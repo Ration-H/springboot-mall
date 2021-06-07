@@ -1,5 +1,6 @@
 package com.gdou.mall.payment.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
@@ -7,7 +8,9 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.gdou.mall.payment.mapper.PaymentInfoMapper;
+import com.gdou.mall.pojo.OrderInfo;
 import com.gdou.mall.pojo.PaymentInfo;
+import com.gdou.mall.service.OrderService;
 import com.gdou.mall.service.PaymentService;
 import com.gdou.mall.utils.ActiveMQUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +30,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     ActiveMQUtil activeMQUtil;
 
+    @Reference
+    OrderService orderService;
+
     @Autowired
     AlipayClient alipayClient;
 
@@ -44,7 +50,10 @@ public class PaymentServiceImpl implements PaymentService {
         PaymentInfo paymentInfoParam = new PaymentInfo();
         paymentInfoParam.setOutTradeNo(paymentInfo.getOutTradeNo());
         PaymentInfo paymentInfoResult = paymentInfoMapper.selectOne(paymentInfoParam);
-        if (StringUtils.isNotBlank(paymentInfoResult.getPaymentStatus()) && paymentInfoResult.getPaymentStatus().equals("已支付")) {//已修改，不再修改
+
+        OrderInfo orderInfoByOutTradeNo = orderService.getOrderInfoByOutTradeNo(paymentInfo.getOutTradeNo());
+
+        if (StringUtils.isNotBlank(paymentInfoResult.getPaymentStatus()) && paymentInfoResult.getPaymentStatus().equals("已支付")&&orderInfoByOutTradeNo.getStatus()!=0) {//已修改，不再修改
             return reslut;
         }
 

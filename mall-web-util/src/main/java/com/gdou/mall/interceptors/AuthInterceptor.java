@@ -21,6 +21,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取方法上的LoginRequire注解
+        //System.out.println("preHandle..........");
         HandlerMethod method = (HandlerMethod ) handler;
         LoginRequired annotation = method.getMethodAnnotation(LoginRequired.class);
 
@@ -46,6 +47,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             String ip = request.getHeader("x-forwarded-for");
             if (StringUtils.isBlank(ip)) {
                 ip = request.getRemoteAddr();
+                if(StringUtils.isBlank(ip)||ip.equals("0:0:0:0:0:0:0:1")){
+                    ip = "127.0.0.1";
+                }
             }
 
             String verifyUrl = "http://localhost:8085/verify?token=" + token + "&currentIp=" + ip;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
@@ -23,7 +24,13 @@ public class SearchController {
     //首页请求
     @RequestMapping("index")
     @LoginRequired(mustLogin = false)
-    public String index() {
+    public String index(HttpServletRequest request, ModelMap modelMap) {
+        String username = String.valueOf(request.getAttribute("username"));
+        String userId = String.valueOf(request.getAttribute("userId"));
+        if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(userId)) {
+            modelMap.put("username", username);
+            modelMap.put("userId", userId);
+        }
         return "index";
     }
 
@@ -79,8 +86,8 @@ public class SearchController {
             }
             modelMap.put("attrValueSelectedList", productSearchCrumbList);
         }
-        if (StringUtils.isNotBlank(productSearchParam.getKeyword())){
-            modelMap.put("keyword",productSearchParam.getKeyword());
+        if (StringUtils.isNotBlank(productSearchParam.getKeyword())) {
+            modelMap.put("keyword", productSearchParam.getKeyword());
         }
         return "list";
     }

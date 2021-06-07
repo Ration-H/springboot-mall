@@ -12,18 +12,13 @@ public class FileUploadUtils {
     public static String uploadImg(MultipartFile multipartFile) {
         //linux IP地址
         String imgUrl = ProjectPara.LINUXIP;
-
-        //获取tracker.conf文件路径
         String path = FileUploadUtils.class.getResource("/tracker.conf").getPath();
         try {
             ClientGlobal.init(path);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //获取TrackerServer
         TrackerClient trackerClient = new TrackerClient();
-
         TrackerServer trackerServer = null;
         try {
             trackerServer = trackerClient.getConnection();

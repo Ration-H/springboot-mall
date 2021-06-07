@@ -93,6 +93,9 @@ public class PassportController {
         String ip = request.getHeader("x-forwarded-for");//使用Nginx代理，获取客户端IP
         if (StringUtils.isBlank(ip)) {//未使用Nginx代理
             ip = request.getRemoteAddr();
+            if(StringUtils.isBlank(ip)||ip.equals("0:0:0:0:0:0:0:1")){
+                ip = "127.0.0.1";
+            }
         }
 
         // 按照设计的算法对参数进行加密后，生成token
@@ -159,6 +162,9 @@ public class PassportController {
             String ip = request.getHeader("x-forwarded-for");//使用Nginx代理，获取客户端IP
             if (StringUtils.isBlank(ip)) {//未使用Nginx代理
                 ip = request.getRemoteAddr();
+                if(StringUtils.isBlank(ip)||ip.equals("0:0:0:0:0:0:0:1")){
+                    ip = "127.0.0.1";
+                }
             }
             //使用Jwt加密，生成token
             token = JwtUtil.encode("com.gdou.mall", userInfoMap, ip);
@@ -179,14 +185,11 @@ public class PassportController {
     private void combatCart(Long userId,HttpServletRequest request,HttpServletResponse response){
         //获取购物车Cookie
         String cartListCookie = CookieUtil.getCookieValue(request, "cartListCookie", true);
-
         if(StringUtils.isNotBlank(cartListCookie)){//购物车不为空，清空Cookie并将Cookie购物车商品添加到用户购物车中
             List<OrderCartItem> orderCartItemList=JSON.parseArray(cartListCookie,OrderCartItem.class);
-
             //清空购物车Cookie
             CookieUtil.setCookie(request, response, "cartListCookie", "", 0, true);
-            //合并购物车
-            for (OrderCartItem cartItem : orderCartItemList) {
+            for (OrderCartItem cartItem : orderCartItemList) {//合并购物车
                 //从DB中查出用户的购物车商品
                 OrderCartItem orderCartItemFromDB = cartService.getCartByUserId(Long.valueOf(userId), cartItem.getProductSkuId());
                 //判断用户之前是否添加过该商品

@@ -28,12 +28,13 @@
 
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="true"/>
+            <property name="suppressAllComments" value="false"/>
             <!-- 阻止注释中包含时间戳 true：是 ： false:否 -->
             <property name="suppressDate" value="true"/>
             <!--  注释是否包含数据库表的注释信息  true：是 ： false:否 -->
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
+
 
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="${jdbc_driver}"
@@ -76,9 +77,12 @@
 
 
         <!-- shema 数据库 tableName表明 -->
-        <table tableName="%">
-            <generatedKey column="id" sqlStatement="MySql"/>
-        </table>
+        <!-- 生成所有表 -->
+<!--        <table tableName="%">-->
+<!--            <generatedKey column="id" sqlStatement="MySql"/>-->
+<!--        </table>-->
 
+
+        <table tableName="invite_code_info" domainObjectName="InviteCodeInfo"/>
     </context>
 </generatorConfiguration>

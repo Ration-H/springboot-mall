@@ -12,13 +12,10 @@ import javax.jms.Session;
 
 @Configuration
 public class ActiveMQConfig {
-
     @Value("${spring.activemq.broker-url:disabled}")
     String brokerURL ;
-
     @Value("${spring.activemq.listener.enable:disabled}")
     String listenerEnable;
-
     @Bean
     public ActiveMQUtil getActiveMQUtil() throws JMSException {
         if(brokerURL.equals("disabled")){
@@ -28,7 +25,6 @@ public class ActiveMQConfig {
         activeMQUtil.init(brokerURL);
         return  activeMQUtil;
     }
-
     //定义一个消息监听器连接工厂，这里定义的是点对点模式的监听器连接工厂
     @Bean(name = "jmsQueueListener")
     public DefaultJmsListenerContainerFactory jmsQueueListenerContainerFactory(ActiveMQConnectionFactory activeMQConnectionFactory ) {

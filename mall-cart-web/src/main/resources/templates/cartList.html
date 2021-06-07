@@ -18,13 +18,13 @@
             <ul class="header-left">
                 <li>
 
-                    <a href="">首页</a>
+                    <a href="http://localhost:8083/index">首页</a>
                 </li>
 
             </ul>
             <ul class="header-right">
-                <li><a href="http://localhost:8085/index.html?ReturnUrl=http://localhost:8084/cartList" style="color: red;">你好，请登录</a></li>
-                <li><a href="../注册页面\index.html" >免费注册</a></li>
+                <li><a href="http://localhost:8085/index.html?ReturnUrl=http://localhost:8084/cartList" style="color: red;" th:text="${username!='null'}?'您好,'+${username}:'你好，请登录 '"></a></li>
+                <li><a href="../注册页面\index.html" th:text="${username!='null'}?'':'免费注册'"></a></li>
                 <li class="spacer"></li>
                 <li><a href="">我的订单</a></li>
                 <li class="spacer"></li>

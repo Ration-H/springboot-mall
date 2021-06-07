@@ -1,4 +1,4 @@
-package com.gdou.mall.search;
+package com.gdou.mall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -43,17 +43,14 @@ public class OrderController {
     public ModelAndView submitOrder(HttpServletRequest request, Long deliveryAddressId, String paymentWay, String orderComment, String tradeCode,ModelMap modelMap) {
         String username = (String) request.getAttribute("username");
         String userId = (String) request.getAttribute("userId");
-
         ModelAndView modelAndView = new ModelAndView();
-
         //核对交易码
         boolean checkTradeCode = orderService.checkTradeCode(tradeCode, userId);
-
         if (!checkTradeCode) {//交易码非法，跳转tradeFail
             modelAndView.setViewName("tradeFail");
+            modelMap.put("errMsg","重复提交订单");
             return modelAndView;
         }
-
         OrderInfo orderInfo = new OrderInfo();
         List<OrderItem> orderItemList = new ArrayList<>();
         BigDecimal totalPrices = new BigDecimal("0");
@@ -71,7 +68,7 @@ public class OrderController {
         outTradeNo = outTradeNo + sdf.format(new Date());// 将时间字符串拼接到外部订单号
 
         orderInfo.setOrderSn(outTradeNo);//外部订单号
-        orderInfo.setStatus(0);//订单状态，0代付款
+        orderInfo.setStatus(0);//订单状态，0待付款
         orderInfo.setPayType(0);//支付方式，0未付款，1支付宝，2微信
         orderInfo.setPayAmount(totalPrices);
         orderInfo.setOrderType(0);
@@ -102,6 +99,7 @@ public class OrderController {
                 boolean checkPrice = skuService.checkPrice(orderCartItem.getProductSkuId(), orderCartItem.getPrice());
                 if (!checkPrice) {//价格不一致,跳转失败页面
                     modelAndView.setViewName("tradeFail");
+                    modelMap.put("errMsg","商品价格变了");
                     return modelAndView;
                 }
                 //计总价
@@ -151,12 +149,11 @@ public class OrderController {
     public String toTrade(HttpServletRequest request, ModelMap modelMap) {
         //查询结算的商品与用户地址信息
         String userId = (String) request.getAttribute("userId");
+        String username = String.valueOf(request.getAttribute("username"));
         List<OrderItem> orderItemList = new ArrayList<>();
         BigDecimal totalPrices = new BigDecimal("0");
-
         //查询用户地址信息
         List<UserReceiveAddress> userReceiveAddressList = userService.getUserReceiveAddressByUserId(Long.valueOf(userId));
-
         //查询用户购物车所有的商品信息
         List<OrderCartItem> cartByUserIdFromCache = cartService.getCartByUserIdFromCache(Long.valueOf(userId));
 

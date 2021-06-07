@@ -22,7 +22,7 @@ public class OrderServiceMqComsumer {
         orderInfo.setOrderSn(mapMessage.getString("out_trade_no"));
         orderInfo.setPayType(Integer.valueOf(mapMessage.getString("pay_type")));
         orderInfo.setStatus(1);
-        orderInfo.setPayAmount(new BigDecimal(mapMessage.getString("mapMessage")));
+        orderInfo.setPayAmount(new BigDecimal(mapMessage.getString("total_amount")));
         int result = orderService.updateOrderInfo(orderInfo);
     }
 }

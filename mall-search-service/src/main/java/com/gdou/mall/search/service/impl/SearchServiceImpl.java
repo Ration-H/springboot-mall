@@ -28,18 +28,12 @@ import java.util.Map;
 public class SearchServiceImpl implements SearchService {
     @Autowired
     JestClient jestClient;
-
     //查询Sku-Search
     @Override
     public List<ProductSkuInfoSearch> list(ProductSearchParam productSearchParam) {
-
         List<ProductSkuInfoSearch> productSkuInfoSearchList = new ArrayList<>();
-
         //获取dsl并执行dsl获取 Sku-Search
         String dsl = getDsl(productSearchParam);
-
-        //System.out.println(dsl);
-
         Search search = new Search.Builder(dsl).addIndex("mall").addType("ProductSkuInfo").build();
         SearchResult searchResult = null;
         try {
@@ -70,7 +64,9 @@ public class SearchServiceImpl implements SearchService {
     public void updateEsInfo(ProductSkuInfo productSkuInfo) throws IOException {
         ProductSkuInfoSearch productSkuInfoSearch=new ProductSkuInfoSearch();
         BeanUtils.copyProperties(productSkuInfo,productSkuInfoSearch);
-        Index put=new Index.Builder(productSkuInfoSearch).index("mall").type("ProductSkuInfo").id(productSkuInfoSearch.getId()+"").build();
+        Index put=new Index.Builder(productSkuInfoSearch).index("mall").type("ProductSkuInfo")
+                .id(productSkuInfoSearch.getId()+"")
+                .build();
         jestClient.execute(put);
     }
 

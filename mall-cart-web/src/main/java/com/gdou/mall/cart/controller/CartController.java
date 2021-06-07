@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,7 +95,7 @@ public class CartController {
 
     @RequestMapping("addToCart")
     @LoginRequired(mustLogin = false)
-    public String addToCart(Integer quantity, Long skuId, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView addToCart(Integer quantity, Long skuId, HttpServletRequest request, HttpServletResponse response) {
         String userId = (String) request.getAttribute("userId");
         String username = (String) request.getAttribute("username");
 
@@ -167,7 +168,26 @@ public class CartController {
             cartService.flushCartCache(Long.valueOf(userId));
         }
 
-        return "redirect:/success.html";
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("redirect:http://localhost:8084/success");
+        modelAndView.addObject("skuDefaultImg",skuInfo.getSkuDefaultImg());
+        modelAndView.addObject("id",skuInfo.getId());
+        modelAndView.addObject("skuName",skuInfo.getSkuName());
+        modelAndView.addObject("quantity",quantity);
+
+
+        return modelAndView;
+        //return "redirect:/success.html";
+    }
+
+    @RequestMapping("success")
+    @LoginRequired(mustLogin = false)
+    public String success(String skuDefaultImg,String id,String skuName,String quantity,ModelMap modelMap){
+        modelMap.put("skuDefaultImg",skuDefaultImg);
+        modelMap.put("id",id);
+        modelMap.put("skuName",skuName);
+        modelMap.put("quantity",quantity);
+        return "success";
     }
 
     //从购物车中查询此商品是否存在

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -51,7 +51,7 @@
   						<a href="#">
   							<img src="index/img/img_05.png" style="border-radius: 50%;"/>
   							<!--<span class="glyphicon glyphicon-map-marker"></span>-->
-  							 北京</a>
+  							 广东</a>
   						<div class="header_head_p_cs">
   							<a href="#" style="background: #C81623;color: #fff;">北京</a>
   							<a href="#">上海</a>
@@ -92,10 +92,10 @@
   					</b>
         <ul>
           <li>
-            <a href="http://localhost:8085/index.html?ReturnUrl=http://localhost:8083/index">你好，请登录</a>
+            <a href="http://localhost:8085/index.html?ReturnUrl=http://localhost:8083/index" th:text="${username!='null'}?'您好,'+${username}:'你好，请登录 '" ></a>
           </li>
           <li>
-            <a href="/注册页面\index.html" class="li_2">免费注册</a>
+            <a href="/注册页面\index.html" class="li_2" th:text="${username!='null'}?'':'免费注册'"></a>
           </li>
         </ul>
       </div>
@@ -106,7 +106,6 @@
       <div class="header_form" >
         <input id="searchText" type="text" placeholder="搜索  商品/品牌/店铺" />
         <span style="background: url(index/img/img_12.png) 0 -1px;"></span>
-        <!--<button><i class="glyphicon"></i></button>-->
         <a href="#" ><img src="index/img/img_09.png" onclick="search()" /></a>
       </div>
       <div class="header_ico">
@@ -195,13 +194,11 @@
               <div class="swiper-slide">
                 <a href="#"><img src="index/img/lunbo.jpg" width="790px" height="340px"/></a>
               </div>
-
               <div class="swiper-slide">
-                <a href="#"><img src="index/img/lunbo3.png" /></a>
+                <a href="#"><img src="index/img/lunbo2.jpg" width="790px" height="340px"/></a>
               </div>
-
               <div class="swiper-slide">
-                <a href="#"><img src="index/img/lunbo6.png" /></a>
+                <a href="#"><img src="index/img/lunbo3.jpg" width="790px" height="340px"/></a>
               </div>
               <div class="swiper-slide">
                 <a href="#"><img src="index/img/lunbo7.png" /></a>
